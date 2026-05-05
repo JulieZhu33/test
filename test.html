@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redo Brand Guidelines</title>
+    <style>
+        /* CSS Reset and Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #111;
+            background-color: #ffffff;
+        }
+
+        .layout-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Architecture */
+        .sidebar {
+            width: 280px;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 30px;
+        }
+
+        .sidebar-logo {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 80px;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-logo svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .navigation {
+            flex-grow: 1;
+            list-style: none;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+        }
+
+        .navigation li {
+            margin-bottom: 18px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .navigation span {
+            color: #a0a0a0;
+            font-size: 10px;
+            margin-left: 2px;
+            font-weight: 400;
+        }
+
+        .footer-links {
+            list-style: none;
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .footer-links li {
+            margin-bottom: 6px;
+        }
+
+        /* Main Content Architecture */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-section {
+            flex-basis: 70%;
+            background: linear-gradient(135deg, #b0cce0 0%, #f7cd90 40%, #fd8a3a 80%, #f05a22 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-logo {
+            font-size: 110px;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            letter-spacing: -3px;
+        }
+
+        .hero-logo svg {
+            width: 90px;
+            height: 90px;
+        }
+
+        .text-section {
+            flex-basis: 30%;
+            padding: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .section-title {
+            font-size: 64px;
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+        }
+
+        .section-paragraphs {
+            font-size: 16px;
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .section-paragraphs p {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                </svg>
+                Redo
+            </div>
+            
+            <ul class="navigation">
+                <li>Brand Strategy <span>01</span></li>
+                <li>Personality <span>02</span></li>
+                <li>Logo <span>03</span></li>
+                <li>Color <span>04</span></li>
+                <li>Typography <span>05</span></li>
+                <li>Art Direction <span>06</span></li>
+            </ul>
+
+            <ul class="footer-links">
+                <li>Download Kit</li>
+                <li>Contact Us</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="hero-section">
+                <div class="hero-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                    </svg>
+                    Redo
+                </div>
+            </div>
+
+            <div class="text-section">
+                <h1 class="section-title">Brand<br>Guidelines</h1>
+                <div class="section-paragraphs">
+                    <p>This guide defines the visual language, design style, and principles that shape a clear and consistent brand experience, no matter the team or area of expertise.</p>
+                    <p>At its core, Redo is about precision and clarity—just like our mission to correct financial errors and optimize balance sheets. This guide lays out the essential design standards that bring our brand to life, from our color system and typography to accessibility benchmarks and...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
