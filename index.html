@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redo Brand Guidelines</title>
+    <style>
+        /* Base Reset and Variables */
+        :root {
+            --primary-orange: #ff5722;
+            --text-primary: #111111;
+            --text-secondary: #555555;
+            --bg-color: #ffffff;
+            --sidebar-width: 280px;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Lateral Navigation Architecture */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 30px;
+            background-color: var(--bg-color);
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 60px;
+            cursor: pointer;
+            letter-spacing: -1px;
+        }
+
+        .sidebar-logo svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .navigation {
+            flex-grow: 1;
+            list-style: none;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+        }
+
+        .navigation li {
+            margin-bottom: 16px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            transition: color 0.2s ease;
+        }
+
+        .navigation li:hover, .navigation li.active {
+            color: var(--primary-orange);
+        }
+
+        .navigation span {
+            color: #a0a0a0;
+            font-size: 10px;
+            margin-left: 4px;
+            font-weight: 400;
+        }
+
+        /* Primary Content Container */
+        .main-wrapper {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .page-content {
+            flex-grow: 1;
+            display: none; /* Controlled via JavaScript */
+            padding-bottom: 60px;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        /* Landing Page Specifics */
+        .hero-banner {
+            height: 60vh;
+            background: linear-gradient(135deg, #b0cce0 0%, #f7cd90 40%, #fd8a3a 80%, #f05a22 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-banner svg { width: 90px; height: 90px; color: white; margin-right: 20px;}
+        .hero-banner h1 { font-size: 100px; color: white; letter-spacing: -3px; display: flex; align-items: center;}
+
+        .landing-text {
+            padding: 80px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            max-width: 1200px;
+        }
+
+        .landing-text h2 { font-size: 64px; line-height: 1.1; letter-spacing: -2px; }
+        .landing-text p { color: var(--text-secondary); margin-bottom: 20px; font-size: 16px; }
+
+        /* Subpage Standardization */
+        .content-header {
+            padding: 80px 60px 40px 60px;
+            max-width: 1000px;
+        }
+
+        .content-header .section-number {
+            font-size: 32px;
+            color: var(--primary-orange);
+            font-weight: 500;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .content-header h1 {
+            font-size: 48px;
+            font-weight: 500;
+            letter-spacing: -1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+        }
+
+        .content-body {
+            padding: 0 60px;
+            max-width: 1000px;
+        }
+
+        /* Structural Elements for Modules */
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .text-lead { font-size: 18px; color: var(--text-secondary); margin-bottom: 24px; }
+        .box-placeholder { background: #f4f4f4; border: 1px solid #e0e0e0; padding: 40px; display: flex; justify-content: center; align-items: center; font-weight: bold; margin-bottom: 20px; min-height: 200px; text-align: center;}
+        
+        .color-swatch { height: 150px; border-radius: 50%; display: inline-block; width: 150px; margin: 10px; border: 1px solid #e0e0e0;}
+        .bg-orange { background-color: var(--primary-orange); }
+        .bg-blue { background-color: #4a7b9d; }
+        .bg-dark-blue { background-color: #1e3a5f; }
+        .bg-grey { background-color: #a0a0a0; }
+        .bg-black { background-color: #111111; }
+        
+        .typography-box { background: #f4f4f4; padding: 60px; text-align: center; font-size: 120px; line-height: 1; letter-spacing: -4px; margin-bottom: 40px; }
+
+        /* Universal Footer Architecture */
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 60px;
+            background-color: var(--bg-color);
+            margin-top: auto;
+        }
+
+        .footer-primary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo { font-size: 64px; font-weight: bold; display: flex; align-items: center; letter-spacing: -3px; }
+        .footer-logo svg { width: 60px; height: 60px; margin-right: 16px; }
+        
+        .footer-links { display: flex; gap: 40px; font-weight: 500; }
+        .footer-links a { color: var(--text-primary); text-decoration: none; cursor: pointer; }
+        .footer-links a:hover { color: var(--primary-orange); }
+
+        .footer-secondary {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .footer-legal { display: flex; gap: 24px; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo" onclick="navigate('landing')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Redo
+        </div>
+        <ul class="navigation">
+            <li id="nav-strategy" onclick="navigate('strategy')">Brand Strategy <span>01</span></li>
+            <li id="nav-personality" onclick="navigate('personality')">Personality <span>02</span></li>
+            <li id="nav-logo" onclick="navigate('logo')">Logo <span>03</span></li>
+            <li id="nav-color" onclick="navigate('color')">Color <span>04</span></li>
+            <li id="nav-typography" onclick="navigate('typography')">Typography <span>05</span></li>
+            <li id="nav-art" onclick="navigate('art')">Art Direction <span>06</span></li>
+        </ul>
+    </aside>
+
+    <div class="main-wrapper">
+        
+        <!-- View: Landing Page -->
+        <main id="view-landing" class="page-content active">
+            <div class="hero-banner">
+                <h1><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg> Redo</h1>
+            </div>
+            <div class="landing-text">
+                <h2>Brand<br>Guidelines</h2>
+                <div>
+                    <p>This guide defines the visual language, design style, and principles that shape a clear and consistent brand experience, no matter the team or area of expertise.</p>
+                    <p>At its core, Redo is about precision and clarity—just like our mission to correct financial errors and optimize balance sheets.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- View: Brand Strategy -->
+        <main id="view-strategy" class="page-content">
+            <div class="content-header">
+                <span class="section-number">01</span>
+                <h1>Brand Strategy</h1>
+            </div>
+            <div class="content-body">
+                <div class="grid-2col">
+                    <div>
+                        <p class="text-lead">In the world of finance, mistakes happen—miscalculations, overlooked expenses, inefficiencies that silently erode profitability. Businesses lose money not because they aren't earning, but because errors go unchecked.</p>
+                        <p class="text-lead">Redo restores confidence in financial numbers.</p>
+                    </div>
+                    <div>
+                        <p class="text-lead">Born from the need for financial clarity, Redo was founded on a simple yet powerful mission: to correct financial errors and optimize balance sheets. We believe that precision is the key to profitability, and that businesses shouldn't be held back by avoidable losses.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- View: Personality -->
+        <main id="view-personality" class="page-content">
+            <div class="content-header">
+                <span class="section-number">02</span>
+                <h1>Personality</h1>
+            </div>
+            <div class="content-body">
+                <p class="text-lead" style="margin-bottom: 60px;">Redo's voice brings our brand to life through the words we write and speak. The way we communicate with customers has the power to transform their financial well-being. Through clear and intentional language, we make financial corrections simple, accessible, and stress-free.</p>
+                <div class="box-placeholder" style="flex-direction: column; font-size: 48px; color: #4a7b9d;">
+                    <div>Precise</div>
+                    <div style="color: var(--primary-orange);">Trustworthy</div>
+                    <div style="color: #1e3a5f;">Approachable</div>
+                    <div style="color: var(--primary-orange);">Reliable</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- View: Logo -->
+        <main id="view-logo" class="page-content">
+            <div class="content-header">
+                <span class="section-number">03</span>
+                <h1>Logo</h1>
+            </div>
+            <div class="content-body">
+                <p class="text-lead">The Redo logo is a sleek, modern arrow that curves backward, symbolizing the power to rewind, correct, and optimize financial decisions. The reversed motion represents our core mission—helping businesses go back, fix errors, and recover lost value.</p>
+                <h3 style="margin: 40px 0 20px 0;">Primary Lockup</h3>
+                <div class="box-placeholder bg-orange" style="color: white; font-size: 64px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 50px; margin-right: 10px;"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    Redo
+                </div>
+            </div>
+        </main>
+
+        <!-- View: Color -->
+        <main id="view-color" class="page-content">
+            <div class="content-header">
+                <span class="section-number">04</span>
+                <h1>Color</h1>
+            </div>
+            <div class="content-body">
+                <p class="text-lead">Redo's color palette is designed to evoke trust, reliability, and financial clarity, ensuring that every touchpoint reflects our commitment to accuracy and efficiency.</p>
+                <div style="text-align: center; margin-top: 60px;">
+                    <div class="color-swatch bg-orange"></div>
+                    <div class="color-swatch bg-blue"></div>
+                    <div class="color-swatch" style="background-color: #e0f2fe;"></div>
+                    <br>
+                    <div class="color-swatch bg-dark-blue"></div>
+                    <div class="color-swatch bg-black"></div>
+                    <div class="color-swatch bg-grey"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- View: Typography -->
+        <main id="view-typography" class="page-content">
+            <div class="content-header">
+                <span class="section-number">05</span>
+                <h1>Typography</h1>
+            </div>
+            <div class="content-body">
+                <p class="text-lead">Redo's typography balances clarity and professionalism with a modern yet timeless type pairing, reinforcing our commitment to accuracy, efficiency, and financial stability.</p>
+                <div class="typography-box" style="color: #1e3a5f;">Aa</div>
+                <div class="grid-2col">
+                    <div>
+                        <h3 style="margin-bottom: 10px;">Primary Typeface</h3>
+                        <h2 style="font-size: 32px; font-weight: normal;">Rethink Sans Reg</h2>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 10px;">Secondary Typeface</h3>
+                        <h2 style="font-size: 32px; font-family: serif;">Hedvig Letters Serif</h2>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- View: Art Direction -->
+        <main id="view-art" class="page-content">
+            <div class="content-header">
+                <span class="section-number">06</span>
+                <h1>Art Direction</h1>
+            </div>
+            <div class="content-body">
+                <p class="text-lead">Redo's photography style reinforces our brand's core values—trust, clarity, and financial empowerment—by showcasing visuals that reflect professionalism, accuracy, and control.</p>
+                <div class="grid-2col" style="margin-top: 40px;">
+                    <div class="box-placeholder">Photography: Modern Workspaces</div>
+                    <div class="box-placeholder">Photography: Financial Technology</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Universal Footer -->
+        <footer class="site-footer">
+            <div class="footer-primary">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    Redo
+                </div>
+                <div class="footer-links">
+                    <a href="#">Download Kit</a>
+                    <a href="mailto:zhulizixijulie@outlook.com">Contact Us</a>
+                    <a onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to the top</a>
+                </div>
+            </div>
+            <div class="footer-secondary">
+                <div class="footer-legal">
+                    <span>© Redo</span>
+                    <span>Legal</span>
+                    <span>Privacy</span>
+                </div>
+                <div>All Rights Reserved</div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Routing Logic -->
+    <script>
+        function navigate(pageId) {
+            // Conceal all content modules
+            document.querySelectorAll('.page-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Remove active states from navigation markers
+            document.querySelectorAll('.navigation li').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Display the targeted module
+            document.getElementById('view-' + pageId).classList.add('active');
+            
+            // Highlight the active navigation element (excluding landing view)
+            if(pageId !== 'landing') {
+                document.getElementById('nav-' + pageId).classList.add('active');
+            }
+
+            // Execute scroll to apex of document
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
